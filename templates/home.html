@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    {% for i in data %}
+    <div class="col-md-6">
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="card-body">
+          <h5 class="card-title">{{i.title}}</h5>
+          <p class="card-text">{{i.contect}}</p>
+          <p class="card-text fw-bold">
+            Author:
+            <small class="text-body-secondary"> {{i.author.name}}</small>
+          </p>
+
+          <div class="d-flex my-3">
+            Category: {%for j in i.category.all %}
+
+            <div class="mx-2">
+              <button type="button" class="btn btn-outline-success btn-sm">
+                {{j}}
+              </button>
+            </div>
+
+            {% endfor %}
+          </div>
+
+          <div>
+            <a href="{% url 'edit_post' i.id %}" class="btn btn-primary me-2">Edit</a>
+            <a href="{% url 'delete_post' i.id %}" class="btn btn-danger ms-2">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
